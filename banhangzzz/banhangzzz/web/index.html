@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Du ký Urban Oasis</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "sidebar-bg": "#111827",
+                        "accent": "#3b82f6",
+                        "accent-hover": "#2563eb",
+                        "bg-main": "#f3f4f6",
+                        "border-color": "#e5e7eb",
+                        "text-main": "#1f2937",
+                        "text-muted": "#6b7280",
+                        "success-main": "#10b981",
+                        "warning-main": "#f59e0b",
+                        "danger-main": "#ef4444",
+                        // Existing variable mappings for backward compatibility
+                        "primary": "#3b82f6",
+                        "primary-container": "#eff6ff",
+                        "on-primary": "#ffffff",
+                        "surface": "#ffffff",
+                        "surface-container": "#f3f4f6",
+                        "surface-container-high": "#e5e7eb"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "full": "9999px"
+                },
+                "fontFamily": {
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                }
+              },
+            },
+          }
+        </script>
+
+</head>
+<body class="bg-bg-main text-text-main font-body h-screen overflow-hidden flex">
+    <!-- Mobile Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed lg:relative h-full w-[240px] bg-sidebar-bg text-white flex flex-col py-6 shrink-0 z-[70] -translate-x-full lg:translate-x-0 transition-transform duration-300">
+        <div class="px-6 mb-8 flex items-center justify-between">
+            <div class="text-xl font-bold tracking-tighter text-accent font-headline cursor-pointer" id="logo">DU KÝ</div>
+            <button id="close-sidebar" class="lg:hidden text-gray-400 hover:text-white">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <div class="flex flex-col flex-grow overflow-y-auto no-scrollbar" id="nav-links">
+            <!-- Navigation links injected by script.js -->
+        </div>
+
+        <div class="px-6 mt-auto">
+            <div id="auth-buttons" class="space-y-4">
+                <button id="login-btn" class="w-full bg-accent text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-accent-hover transition-colors">LOGIN / REGISTER</button>
+                <div id="user-info" class="hidden">
+                    <div class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/10">
+                        <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center font-bold text-xs" id="avatar-initials">AD</div>
+                        <div class="flex-grow min-w-0">
+                            <div id="username-display" class="font-bold text-xs truncate">Admin User</div>
+                            <div class="text-[10px] text-gray-500 uppercase tracking-widest" id="user-role">Quản trị viên</div>
+                        </div>
+                    </div>
+                    <button id="logout-btn" class="w-full mt-2 text-[10px] font-bold text-gray-500 hover:text-white uppercase tracking-widest text-left pl-1">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col min-w-0 bg-bg-main relative">
+        <header class="h-16 bg-white border-b border-border-color flex items-center justify-between px-4 sm:px-8 shrink-0">
+            <div class="flex items-center gap-4 flex-1">
+                <button id="menu-toggle" class="lg:hidden text-text-main p-1 rounded-md hover:bg-bg-main">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="flex-1 max-w-[400px] relative">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-sm">search</span>
+                    <input id="search-input" class="w-full bg-bg-main border border-border-color rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-accent outline-none" placeholder="Tìm kiếm sản phẩm..." type="text"/>
+                </div>
+            </div>
+            
+            <div class="flex items-center ml-4">
+                <!-- Secondary actions if needed -->
+                <div class="flex items-center gap-2 cursor-pointer hover:opacity-80" onclick="navigate('cart')">
+                    <span class="material-symbols-outlined text-text-muted">shopping_basket</span>
+                    <span id="cart-count-display-header" class="text-xs font-bold text-text-main">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main id="app-container" class="flex-1 overflow-y-auto p-4 sm:p-8 no-scrollbar">
+            <!-- Content will be injected here -->
+        </main>
+    </div>
+
+    <!-- Floating Cart Button (Optional, can keep for consistent UX or remove if nav is enough) -->
+    <button id="floating-cart-btn" class="fixed bottom-8 right-8 bg-accent text-white p-4 rounded-xl shadow-lg z-50 flex items-center space-x-2 hover:scale-105 transition-transform active:scale-95 sm:hidden">
+        <span class="material-symbols-outlined">shopping_basket</span>
+        <span id="cart-count-display" class="font-bold text-sm">0</span>
+    </button>
+
+    <!-- Modal for Auth or Checkout -->
+    <div id="modal-container" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 invisible opacity-0 transition-opacity">
+        <div id="modal-content" class="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full relative shadow-2xl">
+            <button id="close-modal" class="absolute top-4 right-4 text-text-muted hover:text-text-main">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Vanilla Javascript Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
+
